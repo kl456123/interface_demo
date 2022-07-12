@@ -11,8 +11,13 @@ import {
 import { useState } from "react";
 import axios from "axios";
 
-const SERVER_PORT = process.env.SERVER_PORT ?? 3000;
-const SERVER_HOST = process.env.SERVER_HOST ?? "http://localhost";
+const SERVER_PORT = process.env.REACT_APP_SERVER_PORT;
+const SERVER_HOST = process.env.REACT_APP_SERVER_HOST;
+if (typeof SERVER_PORT === "undefined") {
+  throw new Error(
+    `REACT_APP_SERVER_PORT must be a defined environment variable`
+  );
+}
 
 function useSwapParameter() {
   const [calldata, setCalldata] = useState(
@@ -58,7 +63,8 @@ export default function Simulator() {
 
   const simulateSwap = async () => {
     // swapParam;
-    const url = `{SERVER_HOST}:{SERVER_PORT}/swap`;
+    const url = `${SERVER_HOST}:${SERVER_PORT}/swap`;
+    console.log(url);
     const params = {
       walletAddress: swapParam.fromAddress,
       calldata: swapParam.calldata,
