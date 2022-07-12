@@ -31,8 +31,7 @@ function useTxParameter() {
 }
 
 export default function SendTx() {
-  const { library, account, activate, deactivate, active } =
-    useWeb3React();
+  const { library, account, activate, deactivate, active } = useWeb3React();
   const txParam = useTxParameter();
   const sendTx = async () => {
     const value = txParam.ethValue;

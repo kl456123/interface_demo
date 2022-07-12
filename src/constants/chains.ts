@@ -4,6 +4,9 @@ export enum SupportedChainId {
   RINKEBY = 4,
   GOERLI = 5,
   KOVAN = 42,
+  BSC = 56,
+  OKC = 66,
+  POLYGON = 137,
 
   ARBITRUM_ONE = 42161,
   ARBITRUM_RINKEBY = 421611,
@@ -22,6 +25,9 @@ export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
   SupportedChainId.ARBITRUM_RINKEBY,
   SupportedChainId.OPTIMISM,
   SupportedChainId.OPTIMISTIC_KOVAN,
+  SupportedChainId.BSC,
+  SupportedChainId.OKC,
+  SupportedChainId.POLYGON,
 ];
 
 export const L1_CHAIN_IDS = [
@@ -30,6 +36,8 @@ export const L1_CHAIN_IDS = [
   SupportedChainId.RINKEBY,
   SupportedChainId.GOERLI,
   SupportedChainId.KOVAN,
+  SupportedChainId.BSC,
+  SupportedChainId.OKC,
 ] as const;
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number];
@@ -39,6 +47,7 @@ export const L2_CHAIN_IDS = [
   SupportedChainId.ARBITRUM_RINKEBY,
   SupportedChainId.OPTIMISM,
   SupportedChainId.OPTIMISTIC_KOVAN,
+  SupportedChainId.POLYGON,
 ] as const;
 
 export type SupportedL2ChainId = typeof L2_CHAIN_IDS[number];

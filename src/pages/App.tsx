@@ -26,15 +26,18 @@ export default function App() {
   return (
     <>
       <VStack justifyContent="center" alignItems="center" h="100vh">
-          {!active ? (
-            <Button onClick={onOpen}>Connect Wallet</Button>
-          ) : (
-            <Button onClick={disconnect}>Disconnect</Button>
-          )}
-          <AccountDetail />
-  {active && (
-    <HStack> <SendTx/> <Simulator/></HStack>
-  )}
+        {!active ? (
+          <Button onClick={onOpen}>Connect Wallet</Button>
+        ) : (
+          <Button onClick={disconnect}>Disconnect</Button>
+        )}
+        <AccountDetail />
+        {active && (
+          <HStack>
+            {" "}
+            <SendTx /> <Simulator />
+          </HStack>
+        )}
       </VStack>
       <WalleModal isOpen={isOpen} onClose={onClose} />
     </>

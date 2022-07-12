@@ -11,6 +11,9 @@ import {
 import { useState } from "react";
 import axios from "axios";
 
+const SERVER_PORT = process.env.SERVER_PORT ?? 3000;
+const SERVER_HOST = process.env.SERVER_HOST ?? "http://localhost";
+
 function useSwapParameter() {
   const [calldata, setCalldata] = useState(
     "0xa6497e5c0000000000000000000000002791bca1f2de4661ed88a30c99a7a9449aa84174000000000000000000000000000000000000000000000000000000000098968000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000180000000000000003b6d03406e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827"
@@ -19,7 +22,7 @@ function useSwapParameter() {
     "0xbD11861D13caFa8Ad6e143DA7034f8A907CD47a8"
   );
   const [ethValue, setEthValue] = useState("0");
-  const [chainId, setChainId] = useState(3);
+  const [chainId, setChainId] = useState(137);
   const [inputToken, setInputToken] = useState(
     "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
   );
@@ -55,7 +58,7 @@ export default function Simulator() {
 
   const simulateSwap = async () => {
     // swapParam;
-    const url = `http://localhost:3000/swap`;
+    const url = `{SERVER_HOST}:{SERVER_PORT}/swap`;
     const params = {
       walletAddress: swapParam.fromAddress,
       calldata: swapParam.calldata,
@@ -67,7 +70,7 @@ export default function Simulator() {
     };
     const res = await axios.get(url, { params });
     const quoteRes = res.data;
-    const {calldata, ...rest} = quoteRes;
+    const { calldata, ...rest } = quoteRes;
     setSwapResponse(rest);
   };
   return (
@@ -143,7 +146,9 @@ export default function Simulator() {
             Simulate Swap
           </Button>
 
-          <div><pre>{JSON.stringify(swapResponse, null, 4)}</pre></div>
+          <div>
+            <pre>{JSON.stringify(swapResponse, null, 4)}</pre>
+          </div>
         </VStack>
       </Box>
     </HStack>
