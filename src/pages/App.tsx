@@ -14,6 +14,7 @@ import { useWeb3React } from "@web3-react/core";
 import Simulator from "../components/Simulator";
 import SendTx from "../components/SendTx";
 import AccountDetail from "../components/AccountDetail";
+import Decoder from "../components/Decoder";
 
 export default function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,6 +40,7 @@ export default function App() {
           </HStack>
         )}
       </VStack>
+      <Decoder />
       <WalleModal isOpen={isOpen} onClose={onClose} />
     </>
   );
