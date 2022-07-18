@@ -27,6 +27,7 @@ export default function App() {
   return (
     <>
       <VStack justifyContent="center" alignItems="center" h="100vh">
+        <Text>Wallet</Text>
         {!active ? (
           <Button onClick={onOpen}>Connect Wallet</Button>
         ) : (
@@ -36,9 +37,12 @@ export default function App() {
         {active && (
           <HStack>
             {" "}
-            <SendTx /> <Simulator />
+            <SendTx /> 
           </HStack>
         )}
+        <br/>
+        <Text>Simulator</Text>
+       <Simulator />
       </VStack>
       <Decoder />
       <WalleModal isOpen={isOpen} onClose={onClose} />
