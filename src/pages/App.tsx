@@ -37,12 +37,12 @@ export default function App() {
         {active && (
           <HStack>
             {" "}
-            <SendTx /> 
+            <SendTx />
           </HStack>
         )}
-        <br/>
+        <br />
         <Text>Simulator</Text>
-       <Simulator />
+        <Simulator />
       </VStack>
       <Decoder />
       <WalleModal isOpen={isOpen} onClose={onClose} />

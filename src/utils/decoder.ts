@@ -1,4 +1,9 @@
-import { DexRouter__factory, DexRouter, XBridge__factory, XBridge } from "../typechain";
+import {
+  DexRouter__factory,
+  DexRouter,
+  XBridge__factory,
+  XBridge,
+} from "../typechain";
 import { BigNumber, BytesLike } from "ethers";
 
 export function decodeSmartSwap(calldata: string) {
@@ -13,43 +18,43 @@ export function decodeSmartSwap(calldata: string) {
   };
 }
 
-export function decodeSwapAndBridgeToImprove(calldata: string){
+export function decodeSwapAndBridgeToImprove(calldata: string) {
   const iface = XBridge__factory.createInterface();
-  const params = iface.decodeFunctionData("swapAndBridgeToImprove", calldata) ;
-    const {_request: request} = params;
-    return {
-        fromToken: request.fromToken as string,
-        toToken: request.toToken as string,
-        to: request.to as string,
-        adaptorId: request.adaptorId.toString(),
+  const params = iface.decodeFunctionData("swapAndBridgeToImprove", calldata);
+  const { _request: request } = params;
+  return {
+    fromToken: request.fromToken as string,
+    toToken: request.toToken as string,
+    to: request.to as string,
+    adaptorId: request.adaptorId.toString(),
     toChainId: request.toChainId.toString(),
     fromTokenAmount: request.fromTokenAmount.toString(),
     toTokenMinAmount: request.toTokenMinAmount.toString(),
     toChainToTokenMinAmount: request.toChainToTokenMinAmount.toString(),
     // data: request.data,
     // dexData: request.dexData,
-    }
+  };
 }
 
-export function decodeBridgeTo(calldata: string){
+export function decodeBridgeTo(calldata: string) {
   const iface = XBridge__factory.createInterface();
-  const params = iface.decodeFunctionData("bridgeTo", calldata) ;
-    const {_request: request} = params;
-    return {
+  const params = iface.decodeFunctionData("bridgeTo", calldata);
+  const { _request: request } = params;
+  return {
     adaptorId: request.adaptorId.toString(),
     to: request.to,
     token: request.token,
     toChainId: request.toChainId.toString(),
     amount: request.amount.toString(),
     data: request.data.toString(),
-    }
+  };
 }
 
-export function decodeClaim(calldata: string){
+export function decodeClaim(calldata: string) {
   const iface = XBridge__factory.createInterface();
-  const params = iface.decodeFunctionData("claim", calldata) ;
-    const {_request: request} = params;
-    return {
+  const params = iface.decodeFunctionData("claim", calldata);
+  const { _request: request } = params;
+  return {
     fromToken: request.fromToken,
     toToken: request.toToken,
     to: request.to,
@@ -59,20 +64,20 @@ export function decodeClaim(calldata: string){
     srcTxHash: request.srcTxHash,
     // dexData: request.dexData,
     // extData: request.extData,
-    }
+  };
 }
 
-export function decodeReceiveGasToken(calldata: string){
+export function decodeReceiveGasToken(calldata: string) {
   const iface = XBridge__factory.createInterface();
-  const params = iface.decodeFunctionData("receiveGasToken", calldata) ;
-    const {_request: request} = params;
-    return {
-        to: request.to,
-        amount: request.amount.toString(),
-        srcChainId: request.srcChainId.toString(),
-        srcTxHash: request.srcTxHash,
-        // extData: request.extData,
-    }
+  const params = iface.decodeFunctionData("receiveGasToken", calldata);
+  const { _request: request } = params;
+  return {
+    to: request.to,
+    amount: request.amount.toString(),
+    srcChainId: request.srcChainId.toString(),
+    srcTxHash: request.srcTxHash,
+    // extData: request.extData,
+  };
 }
 
 export function decodeRoutePath(

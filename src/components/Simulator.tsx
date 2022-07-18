@@ -38,7 +38,7 @@ function useSwapParameter() {
   const [inputAmount, setInputAmount] = useState("14000000000000000000");
   const [txHash, setTxHash] = useState("");
 
-  const [blockNumber, setBlockNumber] = useState(19653260);
+  const [blockNumber, setBlockNumber] = useState(-1);
 
   return {
     calldata,
@@ -60,7 +60,7 @@ function useSwapParameter() {
     blockNumber,
     setBlockNumber,
     bridge,
-    setBridge
+    setBridge,
   };
 }
 
@@ -71,7 +71,6 @@ export default function Simulator() {
   const simulateSwap = async () => {
     // swapParam;
     const url = `${SERVER_HOST}:${SERVER_PORT}/swap`;
-    console.log(url);
     const params = {
       walletAddress: swapParam.fromAddress,
       calldata: swapParam.calldata,
@@ -79,8 +78,9 @@ export default function Simulator() {
       outputToken: swapParam.outputToken,
       inputAmount: swapParam.inputAmount,
       chainId: swapParam.chainId,
-      ethValue: swapParam.ethValue,
-      blockNumber: swapParam.blockNumber,
+      ethValue: swapParam.ethValue ?? undefined,
+      blockNumber:
+        swapParam.blockNumber < 0 ? undefined : swapParam.blockNumber,
       bridge: swapParam.bridge,
     };
     const res = await axios.get(url, { params });
@@ -139,7 +139,7 @@ export default function Simulator() {
             }}
             w="140px"
           />
-        <Input
+          <Input
             placeholder="Bridge"
             maxLength={42}
             onChange={(e) => {
