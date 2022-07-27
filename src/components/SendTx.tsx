@@ -56,28 +56,29 @@ export default function SendTx() {
       >
         <VStack>
           <Input
-            placeholder="Set Calldata"
-            maxLength={1000}
-            onChange={(e) => {
-              txParam.setCalldata(e.currentTarget.value);
-            }}
-            w="140px"
-          />
-          <Input
-            placeholder="Set ToAddress"
+            placeholder="ToAddress"
             maxLength={42}
             onChange={(e) => {
               txParam.setToAddress(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
           <Input
-            placeholder="Set EthValue"
+            placeholder="EthValue"
             maxLength={32}
             onChange={(e) => {
               txParam.setEthValue(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
+          />
+            <Input
+            placeholder="Calldata"
+            maxLength={1000}
+            onChange={(e) => {
+              txParam.setCalldata(e.currentTarget.value);
+            }}
+            w="300px"
+            h="100px"
           />
           <Button
             onClick={sendTx}
