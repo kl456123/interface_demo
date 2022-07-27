@@ -18,6 +18,18 @@ export function decodeSmartSwap(calldata: string) {
   };
 }
 
+export function decodeUnxswap(calldata: string) {
+  const iface = DexRouter__factory.createInterface();
+  const params = iface.decodeFunctionData("unxswap", calldata);
+  const { srcToken, amount, minReturn, pools } = params;
+  return {
+    srcToken,
+    amount,
+    minReturn,
+    pools: pools as BytesLike[],
+  };
+}
+
 export function decodeSwapAndBridgeToImprove(calldata: string) {
   const iface = XBridge__factory.createInterface();
   const params = iface.decodeFunctionData("swapAndBridgeToImprove", calldata);

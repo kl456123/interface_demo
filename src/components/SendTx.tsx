@@ -71,7 +71,7 @@ export default function SendTx() {
             }}
             w="300px"
           />
-            <Input
+          <Input
             placeholder="Calldata"
             maxLength={100000000000}
             onChange={(e) => {

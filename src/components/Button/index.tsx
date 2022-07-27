@@ -1,25 +1,28 @@
-import styled from 'styled-components/macro'
-import { darken } from 'polished'
+import styled from "styled-components/macro";
+import { darken } from "polished";
 
-import { RowBetween } from '../Row'
-import { ChevronDown, Check } from 'react-feather'
-import { Button as RebassButton, ButtonProps as ButtonPropsOriginal } from 'rebass/styled-components'
+import { RowBetween } from "../Row";
+import { ChevronDown, Check } from "react-feather";
+import {
+  Button as RebassButton,
+  ButtonProps as ButtonPropsOriginal,
+} from "rebass/styled-components";
 
-type ButtonProps = Omit<ButtonPropsOriginal, 'css'>
+type ButtonProps = Omit<ButtonPropsOriginal, "css">;
 
 const Base = styled(RebassButton)<
   {
-    padding?: string
-    width?: string
-    $borderRadius?: string
-    altDisabledStyle?: boolean
+    padding?: string;
+    width?: string;
+    $borderRadius?: string;
+    altDisabledStyle?: boolean;
   } & ButtonProps
 >`
-  padding: ${({ padding }) => padding ?? '16px'};
-  width: ${({ width }) => width ?? '100%'};
+  padding: ${({ padding }) => padding ?? "16px"};
+  width: ${({ width }) => width ?? "100%"};
   font-weight: 500;
   text-align: center;
-  border-radius: ${({ $borderRadius }) => $borderRadius ?? '20px'};
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? "20px"};
   outline: none;
   border: 1px solid transparent;
   color: white;
@@ -47,8 +50,7 @@ const Base = styled(RebassButton)<
   > a {
     text-decoration: none;
   }
-`
-
+`;
 
 export const ButtonPrimary = styled(Base)`
   background-color: ${({ theme }) => theme.primary1};
@@ -73,7 +75,7 @@ export const ButtonPrimary = styled(Base)`
     border: 1px solid transparent;
     outline: none;
   }
-`
+`;
 
 export const ButtonSecondary = styled(Base)`
   border: 1px solid ${({ theme }) => theme.primary4};
@@ -81,7 +83,7 @@ export const ButtonSecondary = styled(Base)`
   background-color: transparent;
   font-size: 16px;
   border-radius: 12px;
-  padding: ${({ padding }) => (padding ? padding : '10px')};
+  padding: ${({ padding }) => (padding ? padding : "10px")};
 
   &:focus {
     box-shadow: 0 0 0 1pt ${({ theme }) => theme.primary4};
@@ -101,8 +103,4 @@ export const ButtonSecondary = styled(Base)`
   a:hover {
     text-decoration: none;
   }
-`
-
-
-
-
+`;
