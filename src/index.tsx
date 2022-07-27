@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import { getLibrary } from "./utils/getLibrary";
+import { BrowserRouter } from 'react-router-dom';
 
 const Web3ProviderNetwork = createWeb3ReactRoot("NETWORK");
 const container = document.getElementById("root")!;
@@ -15,7 +16,9 @@ root.render(
     <ChakraProvider>
       <Web3ReactProvider getLibrary={getLibrary}>
         <Web3ProviderNetwork getLibrary={getLibrary}>
+          <BrowserRouter>
           <App />
+          </BrowserRouter>
         </Web3ProviderNetwork>
       </Web3ReactProvider>
     </ChakraProvider>

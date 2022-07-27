@@ -15,6 +15,8 @@ import Simulator from "../components/Simulator";
 import SendTx from "../components/SendTx";
 import AccountDetail from "../components/AccountDetail";
 import Decoder from "../components/Decoder";
+import Refunder from "../components/Refunder";
+import { Routes, Route, Link } from "react-router-dom";
 
 export default function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,6 +47,7 @@ export default function App() {
         <Simulator />
       </VStack>
       <Decoder />
+      <Refunder />
       <WalleModal isOpen={isOpen} onClose={onClose} />
     </>
   );
