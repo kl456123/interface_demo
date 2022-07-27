@@ -98,21 +98,14 @@ export default function Simulator() {
       // padding="10px"
       >
         <VStack>
-          <Input
-            placeholder="Calldata"
-            maxLength={5000}
-            onChange={(e) => {
-              swapParam.setCalldata(e.currentTarget.value);
-            }}
-            w="140px"
-          />
+          
           <Input
             placeholder="FromAddress"
             maxLength={42}
             onChange={(e) => {
               swapParam.setFromAddress(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
           <Input
             placeholder="EthValue"
@@ -120,7 +113,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setEthValue(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
           <Input
             placeholder="InputAmount"
@@ -128,7 +121,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setInputAmount(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
 
           <Input
@@ -137,7 +130,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setInputToken(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
           <Input
             placeholder="Bridge"
@@ -145,7 +138,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setBridge(parseInt(e.currentTarget.value));
             }}
-            w="140px"
+            w="300px"
           />
           <Input
             placeholder="OutputToken"
@@ -153,7 +146,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setOutputToken(e.currentTarget.value);
             }}
-            w="140px"
+            w="300px"
           />
 
           <Input
@@ -162,7 +155,7 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setChainId(parseInt(e.currentTarget.value));
             }}
-            w="140px"
+            w="300px"
           />
           <Input
             placeholder="BlockNumber"
@@ -170,7 +163,16 @@ export default function Simulator() {
             onChange={(e) => {
               swapParam.setBlockNumber(parseInt(e.currentTarget.value));
             }}
-            w="140px"
+            w="300px"
+          />
+        <Input
+            placeholder="Calldata"
+            maxLength={5000}
+            onChange={(e) => {
+              swapParam.setCalldata(e.currentTarget.value);
+            }}
+            w="300px"
+            h="100px"
           />
           <Button onClick={simulateSwap} isDisabled={!swapParam.calldata}>
             Simulate
