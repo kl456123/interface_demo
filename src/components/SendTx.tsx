@@ -73,7 +73,7 @@ export default function SendTx() {
           />
             <Input
             placeholder="Calldata"
-            maxLength={1000}
+            maxLength={100000000000}
             onChange={(e) => {
               txParam.setCalldata(e.currentTarget.value);
             }}

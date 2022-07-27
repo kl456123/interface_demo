@@ -204,6 +204,7 @@ const [darkMode] = useDarkModeManager()
       <StyledNavLink to={"/Simulator"}>Simulator</StyledNavLink>
       <StyledNavLink to={"/Decoder"}>Decoder</StyledNavLink>
       <StyledNavLink to={"/SendTx"}>SendTx</StyledNavLink>
+      <StyledNavLink to={"/Refunder"}>Refunder</StyledNavLink>
         </HeaderLinks>
         <HeaderControls>
         <HeaderElement>
