@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { DEFAULT_DEADLINE_FROM_NOW } from "../../constants/misc";
-import { updateVersion } from '../global/actions'
+import { updateVersion } from "../global/actions";
 import { updateUserDarkMode } from "./actions";
 
 const currentTimestamp = () => new Date().getTime();

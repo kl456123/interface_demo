@@ -98,7 +98,6 @@ export default function Simulator() {
       // padding="10px"
       >
         <VStack>
-          
           <Input
             placeholder="FromAddress"
             maxLength={42}
@@ -165,7 +164,7 @@ export default function Simulator() {
             }}
             w="300px"
           />
-        <Input
+          <Input
             placeholder="Calldata"
             maxLength={5000}
             onChange={(e) => {

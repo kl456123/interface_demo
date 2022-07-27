@@ -37,24 +37,22 @@ const HeaderWrapper = styled.div`
 `;
 
 export default function App() {
-
   return (
     <>
       <AppWrapper>
-       <BrowserRouter>
-        <HeaderWrapper>
-          <Header />
-        </HeaderWrapper>
-        <BodyWrapper>
-          <Routes>
-            <Route path="/" element={<Decoder />} />
-            <Route path="/Simulator" element={<Simulator />} />
-            <Route path="/decoder" element={<Decoder />} />
-            <Route path="/sendTx" element={<SendTx />} />
-          </Routes>
-
-        </BodyWrapper>
-      </BrowserRouter>
+        <BrowserRouter>
+          <HeaderWrapper>
+            <Header />
+          </HeaderWrapper>
+          <BodyWrapper>
+            <Routes>
+              <Route path="/" element={<Decoder />} />
+              <Route path="/Simulator" element={<Simulator />} />
+              <Route path="/decoder" element={<Decoder />} />
+              <Route path="/sendTx" element={<SendTx />} />
+            </Routes>
+          </BodyWrapper>
+        </BrowserRouter>
       </AppWrapper>
     </>
   );

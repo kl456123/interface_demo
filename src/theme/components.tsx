@@ -175,7 +175,6 @@ export const UniTokenAnimated = styled.img`
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
 `;
 
-
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
