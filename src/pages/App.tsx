@@ -5,6 +5,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Simulator from "../components/Simulator";
 import SendTx from "../components/SendTx";
 import Decoder from "../components/Decoder";
+import Refunder from "../components/Refunder";
 import Header from "../components/Header";
 
 const AppWrapper = styled.div`
@@ -40,19 +41,21 @@ export default function App() {
   return (
     <>
       <AppWrapper>
-        <BrowserRouter>
-          <HeaderWrapper>
-            <Header />
-          </HeaderWrapper>
-          <BodyWrapper>
-            <Routes>
-              <Route path="/" element={<Decoder />} />
-              <Route path="/Simulator" element={<Simulator />} />
-              <Route path="/decoder" element={<Decoder />} />
-              <Route path="/sendTx" element={<SendTx />} />
-            </Routes>
-          </BodyWrapper>
-        </BrowserRouter>
+       <BrowserRouter>
+        <HeaderWrapper>
+          <Header />
+        </HeaderWrapper>
+        <BodyWrapper>
+          <Routes>
+            <Route path="/" element={<Decoder />} />
+            <Route path="/Simulator" element={<Simulator />} />
+            <Route path="/decoder" element={<Decoder />} />
+            <Route path="/sendTx" element={<SendTx />} />
+            <Route path="/Refunder" element={<Refunder />} />
+          </Routes>
+
+        </BodyWrapper>
+      </BrowserRouter>
       </AppWrapper>
     </>
   );
