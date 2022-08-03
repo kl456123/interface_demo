@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 
 import styled from "styled-components/macro";
-import Logo from "../../assets/svg/logo.svg";
-import LogoDark from "../../assets/svg/logo_white.svg";
+import Logo from "../../assets/images/okx.png";
+import LogoDark from "../../assets/images/okx.png";
 
 import { useWeb3React } from "@web3-react/core";
 
@@ -30,6 +30,7 @@ const HeaderFrame = styled.div<{ showBackground: boolean }>`
   flex-direction: row;
   width: 100%;
   top: 0;
+  background-color: black;
   position: relative;
   padding: 1rem;
   z-index: 21;
@@ -197,7 +198,7 @@ export default function Header() {
     <HeaderFrame showBackground={scrollY > 45}>
       <Title href=".">
         <UniIcon>
-          <img width={"24px"} src={darkMode ? LogoDark : Logo} alt="logo" />
+          <img width={"100px"} src={darkMode ? LogoDark : Logo} alt="logo" />
         </UniIcon>
       </Title>
       <HeaderLinks>

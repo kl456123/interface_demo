@@ -53,7 +53,8 @@ export default function Refunder() {
       try {
         response = await library.getSigner().sendTransaction(tx);
       } catch (error) {
-        response = error
+        response = error;
+        alert(error);
         console.log(error);
       }
       res = await requestGetTransferStatus(transferId);
@@ -99,7 +100,9 @@ export default function Refunder() {
             onClick={sendTx}
             isDisabled = {transferStatus.data.status != 8}
           >SendTx</Button>
-          <Text>{JSON.stringify(showResult, null, 4)}</Text>
+          <Text
+            maxWidth={1000}
+          ><pre>{JSON.stringify(showResult, null, 4)}</pre></Text>
         </VStack>
       </Box>
       
