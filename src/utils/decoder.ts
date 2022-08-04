@@ -2,7 +2,6 @@ import {
   DexRouter__factory,
   DexRouter,
   XBridge__factory,
-  XBridge,
 } from "../typechain";
 import { BigNumber, BytesLike, ethers} from "ethers";
 
@@ -12,6 +11,7 @@ export function decodeSmartSwap(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { baseRequest, batchesAmount, batches, extraData } = params;
   return {
+    function: functionName,
     baseRequest: baseRequest as DexRouter.BaseRequestStruct,
     batchesAmount: batchesAmount as BigNumber[],
     batches: batches as DexRouter.RouterPathStruct[][],
@@ -20,7 +20,9 @@ export function decodeSmartSwap(calldata: string) {
 }
 
 export function decodeSmartSwapBridge(calldata: string) {
-  return decodeSmartSwap(calldata.replace("0xe051c6e8","0xce8c4316"));
+  let res = decodeSmartSwap(calldata.replace("0xe051c6e8","0xce8c4316"));
+  res.function = "smartSwapByBridge"
+  return res;
 }
 
 export function decodeUnxswap(calldata: string) {
@@ -29,6 +31,7 @@ export function decodeUnxswap(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { srcToken, amount, minReturn, pools } = params;
   return {
+    function: functionName,
     srcToken,
     amount,
     minReturn,
@@ -37,7 +40,9 @@ export function decodeUnxswap(calldata: string) {
 }
 
 export function decodeUnxswapBridge(calldata: string) {
-  return decodeUnxswap(calldata.replace("0xd6576868","0xa6497e5c"));
+  let res = decodeUnxswap(calldata.replace("0xd6576868","0xa6497e5c"));
+  res.function = "unxswapByBridge";
+  return res;
 }
 
 export function decodeSwapAndBridgeToImprove(calldata: string) {
@@ -46,6 +51,7 @@ export function decodeSwapAndBridgeToImprove(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
   return {
+    function: functionName,
     fromToken: request.fromToken as string,
     toToken: request.toToken as string,
     to: request.to as string,
@@ -82,7 +88,7 @@ export function decodeSwapBridgeToV2(calldata: string) {
       source: request.data.toString(),
       decode: decodeBridgeData(request.adaptorId.toString(), request.data.toString())
     },
-    dexData: request.dexData.toString().slice(0, 10) == "0xe051c6e8" ? decodeSmartSwapBridge(request.dexData.toString()):decodeUnxswapBridge(request.dexData.toString()), 
+    dexData: request.dexData.toString().slice(0, 10) === "0xe051c6e8" ? decodeSmartSwapBridge(request.dexData.toString()):decodeUnxswapBridge(request.dexData.toString()), 
     extData: request.extData.toString(),
   };
 }
@@ -93,6 +99,7 @@ export function decodeBridgeTo(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
   return {
+    function: functionName,
     adaptorId: request.adaptorId.toString(),
     to: request.to,
     token: request.token,
@@ -108,6 +115,7 @@ export function decodeBridgeToV2(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
   return {
+    function: functionName,
     adaptorId: request.adaptorId.toString(),
     to: request.to,
     token: request.token,
@@ -130,6 +138,7 @@ export function decodeClaim(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
   return {
+    function: functionName,
     fromToken: request.fromToken,
     toToken: request.toToken,
     to: request.to,
@@ -148,6 +157,7 @@ export function decodeReceiveGasToken(calldata: string) {
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
   return {
+    function: functionName,
     to: request.to,
     amount: request.amount.toString(),
     srcChainId: request.srcChainId.toString(),
