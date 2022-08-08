@@ -176,7 +176,7 @@ export default function Simulator() {
           />
           <Button
             onClick={simulateSwap}
-            isDisabled={!swapParam.calldata || swapParam.bridge !== NaN}
+            isDisabled={!swapParam.calldata || swapParam.bridge === NaN}
           >
             Simulate
           </Button>
