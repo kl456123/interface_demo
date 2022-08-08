@@ -72,12 +72,12 @@ export default function Decoder() {
         }
 
         // bridge
-        case "0x972250fe":{
+        case "0x972250fe": {
           const decodedData = decodeBridgeToV2(calldata);
           setDecodedData(decodedData);
           break;
         }
-        case "0x3d21e25a":{
+        case "0x3d21e25a": {
           const decodedData = decodeSwapBridgeToV2(calldata);
           setDecodedData(decodedData);
           break;
@@ -124,9 +124,9 @@ export default function Decoder() {
         {error ? (
           <Text>{error}</Text>
         ) : (
-          <Text
-          maxWidth={1000}
-          ><pre>{JSON.stringify(decodedData, null, 4)}</pre></Text>
+          <Text maxWidth={1000}>
+            <pre>{JSON.stringify(decodedData, null, 4)}</pre>
+          </Text>
         )}
       </Box>
     </VStack>

@@ -1,6 +1,18 @@
-import { Input, VStack, Text, Box, Button, AlertDialog } from "@chakra-ui/react";
+import {
+  Input,
+  VStack,
+  Text,
+  Box,
+  Button,
+  AlertDialog,
+} from "@chakra-ui/react";
 import { useState } from "react";
-import {requestGetTransferStatus, encodeTx, decodeResponse, requestRefund} from '../utils/refunder'
+import {
+  requestGetTransferStatus,
+  encodeTx,
+  decodeResponse,
+  requestRefund,
+} from "../utils/refunder";
 import { useWeb3React } from "@web3-react/core";
 
 export default function Refunder() {
@@ -11,19 +23,21 @@ export default function Refunder() {
   const [requestRefundResult, setRequestRefundResult] = useState("");
   const [decodeData, setDecodeData] = useState({});
   const [showResult, setShowResult] = useState();
-  const [transferStatus, setTransferStatus] = useState({data:{status:-1}});
-  const RequestGetTransferStatus = async() => {
-    const res = await requestGetTransferStatus(transferId)
+  const [transferStatus, setTransferStatus] = useState({
+    data: { status: -1 },
+  });
+  const RequestGetTransferStatus = async () => {
+    const res = await requestGetTransferStatus(transferId);
     setTransferStatus(res);
     setShowResult(res);
-  }
-  const RequestRefund = async() => {
+  };
+  const RequestRefund = async () => {
     let res = await requestRefund(transferId, amount);
     setRequestRefundResult(res);
     setShowResult(res);
-    res = await requestGetTransferStatus(transferId)
+    res = await requestGetTransferStatus(transferId);
     setTransferStatus(res);
-  }
+  };
   const sendTx = async () => {
     // request
     let chainId;
@@ -33,17 +47,17 @@ export default function Refunder() {
       alert("please connect wallet");
       return;
     }
-    
+
     let res = await requestGetTransferStatus(transferId);
     setTransferStatus(res);
     // already request for refund
-    if (res.data.status == 8){
+    if (res.data.status == 8) {
       const inputData = {
-        wd_onchain:res.data.wd_onchain,
-        sorted_sigs:res.data.sorted_sigs,
-        signers:res.data.signers,
-        powers:res.data.powers
-      }
+        wd_onchain: res.data.wd_onchain,
+        sorted_sigs: res.data.sorted_sigs,
+        signers: res.data.signers,
+        powers: res.data.powers,
+      };
       const _decodeData = decodeResponse(inputData);
       setDecodeData(_decodeData);
       console.log(_decodeData);
@@ -59,7 +73,7 @@ export default function Refunder() {
       }
       res = await requestGetTransferStatus(transferId);
       setTransferStatus(res);
-    } 
+    }
     setShowResult(res);
   };
 
@@ -86,26 +100,24 @@ export default function Refunder() {
             onChange={(e) => {
               setAmount(e.currentTarget.value);
             }}
-            isDisabled = {transferStatus.data.status != 6}
+            isDisabled={transferStatus.data.status != 6}
             w="1000px"
           />
-          <Button
-            onClick={RequestGetTransferStatus}
-          >Search</Button>
+          <Button onClick={RequestGetTransferStatus}>Search</Button>
           <Button
             onClick={RequestRefund}
-            isDisabled = {transferStatus.data.status != 6}
-          >Reund</Button>
-          <Button
-            onClick={sendTx}
-            isDisabled = {transferStatus.data.status != 8}
-          >SendTx</Button>
-          <Text
-            maxWidth={1000}
-          ><pre>{JSON.stringify(showResult, null, 4)}</pre></Text>
+            isDisabled={transferStatus.data.status != 6}
+          >
+            Reund
+          </Button>
+          <Button onClick={sendTx} isDisabled={transferStatus.data.status != 8}>
+            SendTx
+          </Button>
+          <Text maxWidth={1000}>
+            <pre>{JSON.stringify(showResult, null, 4)}</pre>
+          </Text>
         </VStack>
       </Box>
-      
     </VStack>
   );
 }

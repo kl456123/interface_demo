@@ -46,6 +46,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "compile": "typechain --target ethers-v5 --out-dir src/typechain 'src/abis/**/*.json'",
+    "fix": "prettier src --write",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

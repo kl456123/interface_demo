@@ -1,9 +1,5 @@
-import {
-  DexRouter__factory,
-  DexRouter,
-  XBridge__factory,
-} from "../typechain";
-import { BigNumber, BytesLike, ethers} from "ethers";
+import { DexRouter__factory, DexRouter, XBridge__factory } from "../typechain";
+import { BigNumber, BytesLike, ethers } from "ethers";
 
 export function decodeSmartSwap(calldata: string) {
   const iface = DexRouter__factory.createInterface();
@@ -20,8 +16,8 @@ export function decodeSmartSwap(calldata: string) {
 }
 
 export function decodeSmartSwapBridge(calldata: string) {
-  let res = decodeSmartSwap(calldata.replace("0xe051c6e8","0xce8c4316"));
-  res.function = "smartSwapByBridge"
+  let res = decodeSmartSwap(calldata.replace("0xe051c6e8", "0xce8c4316"));
+  res.function = "smartSwapByBridge";
   return res;
 }
 
@@ -40,7 +36,7 @@ export function decodeUnxswap(calldata: string) {
 }
 
 export function decodeUnxswapBridge(calldata: string) {
-  let res = decodeUnxswap(calldata.replace("0xd6576868","0xa6497e5c"));
+  let res = decodeUnxswap(calldata.replace("0xd6576868", "0xa6497e5c"));
   res.function = "unxswapByBridge";
   return res;
 }
@@ -70,7 +66,7 @@ export function decodeSwapBridgeToV2(calldata: string) {
   const functionName = "swapBridgeToV2";
   const params = iface.decodeFunctionData(functionName, calldata);
   const { _request: request } = params;
-  // console.log(request.dexData.toString().slice(0, 10) == "0xce8c4316" ? decodeSmartSwap(request.dexData.toString()):decodeUnxswap(request.dexData.toString())); 
+  // console.log(request.dexData.toString().slice(0, 10) == "0xce8c4316" ? decodeSmartSwap(request.dexData.toString()):decodeUnxswap(request.dexData.toString()));
   return {
     function: functionName,
     fromToken: request.fromToken as string,
@@ -86,9 +82,15 @@ export function decodeSwapBridgeToV2(calldata: string) {
     toChainToTokenMinAmount: request.toChainToTokenMinAmount.toString(),
     data: {
       source: request.data.toString(),
-      decode: decodeBridgeData(request.adaptorId.toString(), request.data.toString())
+      decode: decodeBridgeData(
+        request.adaptorId.toString(),
+        request.data.toString()
+      ),
     },
-    dexData: request.dexData.toString().slice(0, 10) === "0xe051c6e8" ? decodeSmartSwapBridge(request.dexData.toString()):decodeUnxswapBridge(request.dexData.toString()), 
+    dexData:
+      request.dexData.toString().slice(0, 10) === "0xe051c6e8"
+        ? decodeSmartSwapBridge(request.dexData.toString())
+        : decodeUnxswapBridge(request.dexData.toString()),
     extData: request.extData.toString(),
   };
 }
@@ -126,7 +128,10 @@ export function decodeBridgeToV2(calldata: string) {
     amount: request.amount.toString(),
     data: {
       source: request.data.toString(),
-      decode: decodeBridgeData(request.adaptorId.toString(), request.data.toString())
+      decode: decodeBridgeData(
+        request.adaptorId.toString(),
+        request.data.toString()
+      ),
     },
     extData: request.extData.toString(),
   };
@@ -170,26 +175,32 @@ export function decodeReceiveGasToken(calldata: string) {
 
 export function decodeBridgeData(adapterId: string, data: string) {
   const abi = new ethers.utils.AbiCoder();
-  switch(adapterId){
-    case "1" : { // anyswap
-      const decodeData = abi.decode(['address', 'address'], data)
+  switch (adapterId) {
+    case "1": {
+      // anyswap
+      const decodeData = abi.decode(["address", "address"], data);
       const res = {
         routerAddress: decodeData[0],
         anyTokenAddress: decodeData[1],
       };
       return res;
     }
-    case "2" : { //cbridge
-      const decodeData = abi.decode(['address', 'uint64', 'uint32'], data)
-      const res = { 
+    case "2": {
+      //cbridge
+      const decodeData = abi.decode(["address", "uint64", "uint32"], data);
+      const res = {
         routerAddress: decodeData[0],
         nonce: decodeData[1],
         maxSlippage: decodeData[2],
       };
       return res;
     }
-    case "3" : { //swft
-      const decodeData = abi.decode(['address', 'string', 'string', 'uint256'], data)
+    case "3": {
+      //swft
+      const decodeData = abi.decode(
+        ["address", "string", "string", "uint256"],
+        data
+      );
       const res = {
         routerAddress: decodeData[0],
         toToken: decodeData[1],
@@ -203,13 +214,14 @@ export function decodeBridgeData(adapterId: string, data: string) {
 
 export function decodeToChainId(toChainId: string) {
   const hexToChainId = BigInt(toChainId).toString(16);
-  const _length = hexToChainId.length
+  const _length = hexToChainId.length;
   const res = {
-    orderId: "0x" + hexToChainId.toString().substring(0 ,_length - 8 - 40),
-    receviceGasAmount: "0x" + hexToChainId.toString().substring(_length - 8 - 40,_length -8),
-    toChainID: "0x" + hexToChainId.toString().substring(_length - 8,_length)
-  }
-  return res
+    orderId: "0x" + hexToChainId.toString().substring(0, _length - 8 - 40),
+    receviceGasAmount:
+      "0x" + hexToChainId.toString().substring(_length - 8 - 40, _length - 8),
+    toChainID: "0x" + hexToChainId.toString().substring(_length - 8, _length),
+  };
+  return res;
 }
 
 export function decodeRoutePath(
