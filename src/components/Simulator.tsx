@@ -98,6 +98,15 @@ export default function Simulator() {
       // padding="10px"
       >
         <VStack>
+          <Select
+            placeholder="Select Mode"
+            onChange={(e) => {
+              swapParam.setBridge(parseInt(e.currentTarget.value));
+            }}
+          >
+            <option value="0">DEX</option>
+            <option value="1">Bridge</option>
+          </Select>
           <Input
             placeholder="FromAddress"
             maxLength={42}
@@ -131,15 +140,7 @@ export default function Simulator() {
             }}
             w="300px"
           />
-          <Select
-            placeholder="Select Mode"
-            onChange={(e) => {
-              swapParam.setBridge(parseInt(e.currentTarget.value));
-            }}
-          >
-            <option value="0">DEX</option>
-            <option value="1">Bridge</option>
-          </Select>
+
           <Input
             placeholder="OutputToken"
             maxLength={42}
