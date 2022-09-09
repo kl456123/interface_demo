@@ -7,6 +7,7 @@ import SendTx from "../components/SendTx";
 import Decoder from "../components/Decoder";
 import Refunder from "../components/Refunder";
 import Header from "../components/Header";
+import TronTool from "../components/TronTool";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -52,6 +53,7 @@ export default function App() {
               <Route path="/decoder" element={<Decoder />} />
               <Route path="/sendTx" element={<SendTx />} />
               <Route path="/Refunder" element={<Refunder />} />
+              <Route path="/TronTool" element={<TronTool />} />
             </Routes>
           </BodyWrapper>
         </BrowserRouter>

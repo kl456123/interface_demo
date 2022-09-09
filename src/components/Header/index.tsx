@@ -206,6 +206,7 @@ export default function Header() {
         <StyledNavLink to={"/Decoder"}>Decoder</StyledNavLink>
         <StyledNavLink to={"/SendTx"}>SendTx</StyledNavLink>
         <StyledNavLink to={"/Refunder"}>Refunder</StyledNavLink>
+        <StyledNavLink to={"/TronTool"}>TronTool</StyledNavLink>
       </HeaderLinks>
       <HeaderControls>
         <HeaderElement>
