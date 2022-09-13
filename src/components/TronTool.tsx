@@ -21,13 +21,14 @@ export default function TronTool() {
     if (result.receipt.result === "SUCCESS") {
       setMsg("transaction exec success");
     } else {
+        console.log(result.contractResult.length);
       for (let i = 0; i < result.contractResult.length; i++) {
         const res = result.contractResult[i];
         if (res) {
           const errorMsg = toUtf8("0x" + res);
           setMsg(errorMsg);
         } else {
-          setMsg("error message is empty");
+          setMsg(result.receipt.result);
         }
       }
     }
